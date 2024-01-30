@@ -1,0 +1,1022 @@
+{
+	"info": {
+		"_postman_id": "21b0033a-6406-49a0-916a-72c46749be1d",
+		"name": "LocalLogisticsPortalAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "vendors",
+			"item": [
+				{
+					"name": "AllVendors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vendors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vendors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VendorByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vendors/c321162e-98d8-45c3-a800-0aa241fab1a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vendors",
+								"c321162e-98d8-45c3-a800-0aa241fab1a3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateVendor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseId\": \"488a3f80-e5b3-450f-8c68-a9c260bd98fa\",\r\n    \"businessName\": \"Test Vendor234\",\r\n    \"type\": \"Retailer\",\r\n    \"email\": \"testvedndor@gmail.com\",\r\n    \"phone\": \"7894562853\",\r\n    \"location\": \"NY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/vendors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vendors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateVendor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseId\": \"98ffe4dc-23bd-4e3a-8822-2f6d81371105\",\r\n    \"businessName\": \"Test Vendor234\",\r\n    \"type\": \"Retailer\",\r\n    \"email\": \"testvedndor@gmail.com\",\r\n    \"phone\": \"7894562853\",\r\n    \"location\": \"Newyork\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/vendors/e8390040-b3a4-4189-8b28-fa13e499c6b8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vendors",
+								"e8390040-b3a4-4189-8b28-fa13e499c6b8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteVendor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vendors/b6a5e3ff-79ab-4bb0-82f4-7dfc8e574b39",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vendors",
+								"b6a5e3ff-79ab-4bb0-82f4-7dfc8e574b39"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vendorsBywarehouse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/vendors/findByWarehouseId/488a3f80-e5b3-450f-8c68-a9c260bd98fa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vendors",
+								"findByWarehouseId",
+								"488a3f80-e5b3-450f-8c68-a9c260bd98fa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "products- get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "products- getById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/products/b76dd8bd-4804-4b2e-adc3-1eb1550db148",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"b76dd8bd-4804-4b2e-adc3-1eb1550db148"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "products- CreateProduct",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productModel\": \"Nike Air Max 90\",\r\n    \"categoryName\": \"shoes\",\r\n    \"brand\": \"Nike\",\r\n    \"size\": \"10\",\r\n    \"weight\": \"8 lbs\",\r\n    \"dimensions\": \"13.25\\\" (L) x 10\\\" (W) x 5\\\" (D)\",\r\n    \"skuNumber\": \"CN8490-100\",\r\n    \"material\": null,\r\n    \"noOfPieces\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "products- update product",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productModel\": \"Nike Air Max 1000\",\r\n    \"categoryName\": \"shoes\",\r\n    \"brand\": \"Nike\",\r\n    \"size\": \"10\",\r\n    \"weight\": \"8 lbs\",\r\n    \"dimensions\": \"13.25\\\" (L) x 10\\\" (W) x 5\\\" (D)\",\r\n    \"skuNumber\": \"CN8490-100\",\r\n    \"material\": null,\r\n    \"noOfPieces\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/products/050e0eb0-c1b5-4d6a-a5f2-8f404bf39192",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"050e0eb0-c1b5-4d6a-a5f2-8f404bf39192"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "products-delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/products/050e0eb0-c1b5-4d6a-a5f2-8f404bf39192",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"products",
+										"050e0eb0-c1b5-4d6a-a5f2-8f404bf39192"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product category",
+					"item": [
+						{
+							"name": "categories-get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/product-categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product-categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories-get categoryById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/product-categories/06e962aa-9fc3-4e74-acba-cb924e5964d9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product-categories",
+										"06e962aa-9fc3-4e74-acba-cb924e5964d9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories-cretae category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"stationery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/product-categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product-categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories-update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"school supplies\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/product-categories/d4f15327-8c14-4a25-9923-ba00b79781cd",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product-categories",
+										"d4f15327-8c14-4a25-9923-ba00b79781cd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories-delete category",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/product-categories/d4f15327-8c14-4a25-9923-ba00b79781cd",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product-categories",
+										"d4f15327-8c14-4a25-9923-ba00b79781cd"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "vendorProducts",
+					"item": [
+						{
+							"name": "vendor products - get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/vendorproducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendorproducts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vendor products - get By vendorId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/vendorproducts/ed28da96-465e-4a79-86c7-fa6e37f946a8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendorproducts",
+										"ed28da96-465e-4a79-86c7-fa6e37f946a8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vendor products - delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {\r\n        \"vendor_id\": \"ed28da96-465e-4a79-86c7-fa6e37f946a8\",\r\n        \"product_id\": \"c5b9e32a-4c83-401a-95b9-eccea2c4ae22\"\r\n    },\r\n    \"quantity\": \"1000\",\r\n    \"product_warehouse_plot\": \"MWSN106****\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/vendorproducts/ed28da96-465e-4a79-86c7-fa6e37f946a8/c5b9e32a-4c83-401a-95b9-eccea2c4ae22",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendorproducts",
+										"ed28da96-465e-4a79-86c7-fa6e37f946a8",
+										"c5b9e32a-4c83-401a-95b9-eccea2c4ae22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vendor products - create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n            \"id\": {\r\n                \"vendor_id\": \"ed28da96-465e-4a79-86c7-fa6e37f946a8\",\r\n                \"product_id\": \"c5b9e32a-4c83-401a-95b9-eccea2c4ae22\"\r\n            },\r\n            \"quantity\": \"100\",\r\n            \"product_warehouse_plot\": \"MWSN106\"\r\n        }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8095/vendorproducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8095",
+									"path": [
+										"vendorproducts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vendor products - update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": {\r\n        \"vendor_id\": \"ed28da96-465e-4a79-86c7-fa6e37f946a8\",\r\n        \"product_id\": \"c5b9e32a-4c83-401a-95b9-eccea2c4ae22\"\r\n    },\r\n    \"quantity\": \"1000\",\r\n    \"product_warehouse_plot\": \"MWSN106****\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/vendorproducts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"vendorproducts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "AllWarehouses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WarehouseByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouses/488a3f80-e5b3-450f-8c68-a9c260bd98fa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses",
+								"488a3f80-e5b3-450f-8c68-a9c260bd98fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateWarehouses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseName\": \"Fulfillment Distribution Center\",\r\n    \"location\": \"UT\",\r\n    \"warehouseManager\": \"Emmet\",\r\n    \"phone\": \"5556667777\",\r\n    \"email\": \"utwarehouse@gmail.com\",\r\n    \"warehouseStatus\": \"ACTIVE\",\r\n    \"warehouseOperatingHours\": \"7 am - 7 pm\",\r\n    \"createdBy\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateWarehouses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseName\": \"Fulfillment DC\",\r\n    \"location\": \"UT\",\r\n    \"warehouseManager\": \"Emmet\",\r\n    \"phone\": \"5556667777\",\r\n    \"email\": \"utwarehouse@gmail.com\",\r\n    \"warehouseStatus\": \"ACTIVE\",\r\n    \"warehouseOperatingHours\": \"7 am - 7 pm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/warehouses/f475b884-9af0-420d-bedc-cb77f58f658d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses",
+								"f475b884-9af0-420d-bedc-cb77f58f658d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWarehouses",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/warehouses/f475b884-9af0-420d-bedc-cb77f58f658d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"warehouses",
+								"f475b884-9af0-420d-bedc-cb77f58f658d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "accessorials",
+			"item": [
+				{
+					"name": "All Accessorials",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accessorials",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accessorialByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accessorials/9791a00e-c158-465e-b6ae-ee1b53b23f00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorials",
+								"9791a00e-c158-465e-b6ae-ee1b53b23f00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create accessorial",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessorialType\": \"Double-Boxing New\",\r\n    \"description\": \"Double box New\",\r\n    \"createdBy\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/accessorials",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update accessorial",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accessorialType\": \"Double-Boxing\",\r\n    \"description\": \"Double box\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/accessorials/9791a00e-c158-465e-b6ae-ee1b53b23f00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorials",
+								"9791a00e-c158-465e-b6ae-ee1b53b23f00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete accessorial",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accessorials/6826af1d-3121-4fc0-8a91-c173758e1d5b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorials",
+								"6826af1d-3121-4fc0-8a91-c173758e1d5b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "accessorial rates",
+			"item": [
+				{
+					"name": "AllAccessorialRates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accessorial-rates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorial-rates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AccessorialRateById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accessorial-rates/9791a00e-c158-465e-b6ae-ee1b53b23f00/d4ddb773-fa1a-43b0-9254-f7873cf7101b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorial-rates",
+								"9791a00e-c158-465e-b6ae-ee1b53b23f00",
+								"d4ddb773-fa1a-43b0-9254-f7873cf7101b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create accessorial rate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {\r\n        \"accessorial_id\": \"9791a00e-c158-465e-b6ae-ee1b53b23f00\",\r\n        \"warehouse_id\": \"d4ddb773-fa1a-43b0-9254-f7873cf7101b\"\r\n    },\r\n    \"accessorialRate\": 100.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/accessorial-rates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorial-rates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Accessorial Rate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {\r\n        \"accessorial_id\": \"9791a00e-c158-465e-b6ae-ee1b53b23f00\",\r\n        \"warehouse_id\": \"d4ddb773-fa1a-43b0-9254-f7873cf7101b\"\r\n    },\r\n    \"accessorialRate\": 50.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8097/accessorial-rates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8097",
+							"path": [
+								"accessorial-rates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Accessorial rates",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accessorial-rates/9791a00e-c158-465e-b6ae-ee1b53b23f00/d4ddb773-fa1a-43b0-9254-f7873cf7101b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accessorial-rates",
+								"9791a00e-c158-465e-b6ae-ee1b53b23f00",
+								"d4ddb773-fa1a-43b0-9254-f7873cf7101b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "AllOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OrderByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/2b10e39f-47f2-42d9-93d2-2e0dea9d6135",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"2b10e39f-47f2-42d9-93d2-2e0dea9d6135"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateOrders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseId\": \"d4ddb773-fa1a-43b0-9254-f7873cf7101b\",\r\n    \"vendorId\": \"ed28da96-465e-4a79-86c7-fa6e37f946a8\",\r\n    \"productId\": \"e05f0dfb-45df-4e09-b0f8-d89e48dd7a87\",\r\n    \"accessorialId\": \"dc197922-90ed-4a8e-b9ec-fa210691291e\",\r\n    \"shippingAddress\": \"Detroit, MI\",\r\n    \"condition\": \"New\",\r\n    \"totalPrice\": 10100.0,\r\n    \"status\": \"PENDING\",\r\n    \"receivedOn\": \"2024-01-05T16:00:16.546+00:00\",\r\n    \"paymentMode\": \"debit***\",\r\n    \"billingAddress\": \"Novi, MI\",\r\n    \"paymentConfirmationNumber\": \"N9WD6Yoo2myyg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8094/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8094",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateOrders",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"warehouseId\": \"d4ddb773-fa1a-43b0-9254-f7873cf7101b\",\r\n    \"vendorId\": \"ed28da96-465e-4a79-86c7-fa6e37f946a8\",\r\n    \"productId\": \"e05f0dfb-45df-4e09-b0f8-d89e48dd7a87\",\r\n    \"accessorialId\": \"dc197922-90ed-4a8e-b9ec-fa210691291e\",\r\n    \"shippingAddress\": \"Detroit, MI\",\r\n    \"condition\": \"New\",\r\n    \"totalPrice\": 101.0,\r\n    \"status\": \"PENDING\",\r\n    \"receivedOn\": \"2024-01-05T16:00:16.546+00:00\",\r\n    \"paymentMode\": \"debit***\",\r\n    \"billingAddress\": \"Novi, MI\",\r\n    \"paymentConfirmationNumber\": \"N9WD6Yoo2myyg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders/2b10e39f-47f2-42d9-93d2-2e0dea9d6135",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"2b10e39f-47f2-42d9-93d2-2e0dea9d6135"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteOrders",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/823542c0-b709-482d-b141-9eecb5d05f85",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"823542c0-b709-482d-b141-9eecb5d05f85"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
