@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "21b0033a-6406-49a0-916a-72c46749be1d",
-		"name": "LocalLogisticsPortalAPI",
+		"name": "LocalLogisticsPortalAPI _ New",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -904,7 +904,13 @@
 					"name": "AllOrders",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcmF0aHl1c2hhQGdtYWlsLmNvbSIsImlhdCI6MTcwNjU5Mzk2NCwiZXhwIjoxNzA2NTk3NTY0fQ.16JRXAkfAwOTXQ6pEDKVCahHSJIneJgluywNlVqYOnQqa5MwD3YRov3xhbLIWBNCxEJUgBj83u12grIRX-VlPg",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/orders",
 							"protocol": "http",
@@ -1011,6 +1017,95 @@
 							"path": [
 								"orders",
 								"823542c0-b709-482d-b141-9eecb5d05f85"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "jwt",
+			"item": [
+				{
+					"name": "authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"in28minutes\",\r\n    \"password\":\"dummy\",\r\n    \"salt\":\"not exist\",\r\n    \"firstName\":\"ram\",\r\n    \"lastName\":\"sita\",\r\n    \"roleId\":\"e0dbc9d2-dacf-484e-9be9-a0ea76c0475b\",\r\n    \"warehouseId\":\"d4ddb773-fa1a-43b0-9254-f7873cf7101b\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/create-user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginJWT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"in28minutes\",\r\n    \"password\": \"dummy\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorization",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcmF0aHl1c2hhQGdtYWlsLmNvbSIsImlhdCI6MTcwNjYyNzQ3MywiZXhwIjoxNzA2NjMxMDczfQ.MP2ApDexfzvKUWd9wC_pfVfIUaZZiTcoazLSoxa8FXlsafEDXXHmkldhbCzICO41qWp9xHzXIWIJl-ydlpX-Gw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/use/test-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"use",
+								"test-users"
 							]
 						}
 					},
