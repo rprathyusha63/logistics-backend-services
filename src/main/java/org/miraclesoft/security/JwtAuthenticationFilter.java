@@ -29,6 +29,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
     @Autowired
     private JwtHelper jwtHelper;
+    @Autowired
+    SecurityContextRepository securityContextRepository;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -90,6 +92,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                securityContextRepository.saveContext(SecurityContextHolder.getContext(),request,response);
 
 
             } else {

@@ -44,10 +44,11 @@ public class AuthController {
 
         UserDetails userAuthDetails = userAuthDetailsService.loadUserByUsername(request.getEmail());
         String token = this.helper.generateToken(userAuthDetails);
-
+        UserAuth user = (UserAuth)userAuthDetails;
         JwtResponse response = JwtResponse.builder()
                 .jwttoken(token)
-                .username(userAuthDetails.getUsername()).build();
+                .username(user.getFirstName()+ " " + user.getLastName())
+                .email(user.getEmail()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
