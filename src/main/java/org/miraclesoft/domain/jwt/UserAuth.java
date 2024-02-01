@@ -36,8 +36,8 @@ public class UserAuth implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "role_id")
-    private String roleId;
+    @Column(name = "role_name")
+    private String roleName;
 
     @Column(name = "warehouse_id")
     private String warehouseId;
