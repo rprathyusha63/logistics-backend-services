@@ -1,7 +1,9 @@
 package org.miraclesoft.domain.jwt;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.miraclesoft.domain.Warehouse;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -39,6 +41,11 @@ public class UserAuth implements UserDetails {
 
     @Column(name = "warehouse_id")
     private String warehouseId;
+
+    @JsonProperty
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "warehouse_id", insertable = false, updatable = false)
+    private Warehouse warehouse;
 
 
 
