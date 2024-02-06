@@ -49,7 +49,6 @@ public class AuthController {
                 .jwttoken(token)
                 .username(user.getFirstName()+ " " + user.getLastName())
                 .email(user.getEmail())
-                .warehouse(user.getWarehouse())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
