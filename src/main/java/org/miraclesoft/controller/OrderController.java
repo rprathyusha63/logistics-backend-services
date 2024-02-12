@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 @CrossOrigin
@@ -42,7 +45,10 @@ public class OrderController {
     // Create an Order
     @PostMapping
     public Mono<ResponseEntity<Order>> createOrder(@RequestBody Order order) {
-        order.setOrderId(UUID.randomUUID().toString());
+        Random rnd = new Random();
+        int n = 100000 + rnd.nextInt(900000);
+        Calendar c= Calendar.getInstance();
+        order.setOrderId("MLOG"+c.get(Calendar.YEAR)+Integer.toString(n));
         Order savedOrder = orderService.saveOrder(order);
         return Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(savedOrder));
     }
