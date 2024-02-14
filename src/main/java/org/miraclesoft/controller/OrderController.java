@@ -1,6 +1,9 @@
 package org.miraclesoft.controller;
 import org.miraclesoft.domain.Order;
+import org.miraclesoft.domain.VendorProduct;
+import org.miraclesoft.domain.VendorProductId;
 import org.miraclesoft.service.OrderService;
+import org.miraclesoft.service.VendorProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -19,20 +20,50 @@ import java.util.UUID;
 public class OrderController {
 
     private final OrderService orderService;
+    private final VendorProductService vendorProductService;
+
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, VendorProductService vendorProductService) {
         this.orderService = orderService;
+        this.vendorProductService=vendorProductService;
     }
 
     // Get all Orders
     @GetMapping
-    public Flux<ResponseEntity<Order>> getAllOrders() {
-        return Flux.fromIterable(orderService.getAllOrders())
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.notFound().build());
+    public ResponseEntity<List<Order>> getAllOrders() {
+        List<Order> orders = orderService.getAllOrders();
+        if(orders.size()!=0){
+            return new ResponseEntity<>(orders,HttpStatus.OK);
+        }
+        else {
+            ResponseEntity res = new ResponseEntity(HttpStatus.NOT_FOUND);
+            return res;
+        }
     }
 
+    @GetMapping("/today")
+    public ResponseEntity<List<Order>> getAllOrdersToday() {
+        List<Order> orders = orderService.getAllOrdersToday();
+        if(orders.size()!=0){
+            return new ResponseEntity<>(orders,HttpStatus.OK);
+        }
+        else {
+           ResponseEntity res = new ResponseEntity(HttpStatus.NOT_FOUND);
+           return res;
+        }
+    }
+    @GetMapping("/warehouse/{id}")
+    public ResponseEntity<List<Order>> getOrdersByWarehouse(@PathVariable("id") String warehouseId) {
+        List<Order> orders = orderService.getOrdersByWarehouse(warehouseId);
+        if(orders.size()!=0){
+            return new ResponseEntity<>(orders,HttpStatus.OK);
+        }
+        else {
+            ResponseEntity res = new ResponseEntity(HttpStatus.NOT_FOUND);
+            return res;
+        }
+    }
     // Get Order by ID
     @GetMapping("/{id}")
     public Mono<ResponseEntity<Order>> getOrder(@PathVariable String id) {
@@ -49,6 +80,8 @@ public class OrderController {
         int n = 100000 + rnd.nextInt(900000);
         Calendar c= Calendar.getInstance();
         order.setOrderId("MLOG"+c.get(Calendar.YEAR)+Integer.toString(n));
+        Timestamp receievedOn = new Timestamp(Calendar.getInstance().getTime().getTime());
+        order.setReceivedOn(receievedOn);
         Order savedOrder = orderService.saveOrder(order);
         return Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(savedOrder));
     }
@@ -66,11 +99,28 @@ public class OrderController {
             existingOrder.setShippingAddress(updatedOrder.getShippingAddress());
             existingOrder.setCondition(updatedOrder.getCondition());
             existingOrder.setTotalPrice(updatedOrder.getTotalPrice());
+            if(existingOrder.getStatus().toString().equals("PENDING") || existingOrder.getStatus().toString().equals("PROCESSING")){
+                if(updatedOrder.getStatus().toString().equals("SHIPPED")){
+                    VendorProduct existing = vendorProductService.getById(new VendorProductId(updatedOrder.getVendorId(), updatedOrder.getProductId()));
+                    if (existing != null) {
+                        existing.setQuantity(existing.getQuantity()-1);
+                        VendorProduct updatedVendorProduct = vendorProductService.saveVendorProduct(existing);
+                    }
+                }
+
+            }
             existingOrder.setStatus(updatedOrder.getStatus());
-            existingOrder.setStatus(updatedOrder.getStatus());
+
             existingOrder.setReceivedOn(updatedOrder.getReceivedOn());
-            existingOrder.setProcessedOn(updatedOrder.getProcessedOn());
-            existingOrder.setShippedOn(updatedOrder.getShippedOn());
+            if(updatedOrder.getStatus().toString().equals("SHIPPED")){
+                existingOrder.setShippedOn(new Timestamp(Calendar.getInstance().getTime().getTime()));
+                if(existingOrder.getProcessedOn()==null){
+                    existingOrder.setProcessedOn(new Timestamp(Calendar.getInstance().getTime().getTime()));
+                }
+            }
+            if(updatedOrder.getStatus().toString().equals("PROCESSING")){
+                existingOrder.setProcessedOn(new Timestamp(Calendar.getInstance().getTime().getTime()));
+            }
             existingOrder.setPaymentMode(updatedOrder.getPaymentMode());
             existingOrder.setBillingAddress(updatedOrder.getBillingAddress());
             existingOrder.setPaymentConfirmationNumber(updatedOrder.getPaymentConfirmationNumber());

@@ -44,4 +44,7 @@ public class Product {
 
 	@Column(name = "no_of_pieces")
 	private String noOfPieces;
+
+	@Column(name = "resolution")
+	private String resolution;
 }
