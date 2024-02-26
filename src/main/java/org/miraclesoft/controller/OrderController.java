@@ -1,4 +1,8 @@
 package org.miraclesoft.controller;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 import org.miraclesoft.domain.Order;
 import org.miraclesoft.domain.VendorProduct;
 import org.miraclesoft.domain.VendorProductId;
@@ -6,11 +10,20 @@ import org.miraclesoft.service.OrderService;
 import org.miraclesoft.service.VendorProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -21,6 +34,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final VendorProductService vendorProductService;
+
 
 
     @Autowired
@@ -114,6 +128,7 @@ public class OrderController {
             existingOrder.setReceivedOn(updatedOrder.getReceivedOn());
             if(updatedOrder.getStatus().toString().equals("SHIPPED")){
                 existingOrder.setShippedOn(new Timestamp(Calendar.getInstance().getTime().getTime()));
+                existingOrder.setShippingNumber(orderService.generateShippingNumber(25));
                 if(existingOrder.getProcessedOn()==null){
                     existingOrder.setProcessedOn(new Timestamp(Calendar.getInstance().getTime().getTime()));
                 }
@@ -145,5 +160,30 @@ public class OrderController {
             return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Order not found with ID: " + id));
         }
+    }
+    @GetMapping(value = "/barcode/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getBarcode(@PathVariable String id) throws IOException, WriterException, SQLException {
+        //return new SerialBlob(orderService.generateBarcode("Hello World", 250,250));
+        //return orderService.generateBarcode("Hello World", 250,250);
+        Order order = orderService.getOrderById(id);
+        String barcodeText = generateBarcodeText(order);
+        // Replace with your actual data
+        System.out.println("********* "+order.toString());
+        int width = 800;
+        int height = 100;
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(barcodeText, BarcodeFormat.CODE_128, width, height);
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                bufferedImage.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
+            }
+        }
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    private String generateBarcodeText(Order order) {
+        return order.getShippingNumber();
     }
 }

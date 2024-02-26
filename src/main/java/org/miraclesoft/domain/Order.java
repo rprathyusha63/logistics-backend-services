@@ -75,6 +75,9 @@ public class Order {
     @Column(name = "payment_confirmation_number")
     private String paymentConfirmationNumber;
 
+    @Column(name = "shipping_number")
+    private String shippingNumber;
+
     public enum OrderStatus {
         PENDING,
         PROCESSING,
